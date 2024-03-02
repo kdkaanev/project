@@ -11,7 +11,7 @@ def index(request):
 
 def show_guitars(request):
     queryset = Guitar.objects.all().order_by('model')  # Replace with your actual queryset or None
-    items_per_page = 4 # You can adjust this value based on your preference
+    items_per_page = 3 # You can adjust this value based on your preference
 
     # Initialize the paginator
     paginator = Paginator(queryset, items_per_page)
