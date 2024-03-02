@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{%static 'styles/styles.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="{% static 'picture/guitar-27-16.png' %}" type="image/x-icon">
+    <title>Guitar House</title>
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+       
+        <nav>
+            <a class="index-navigation" href="{% url 'index' %}"
+            ><span><img src="{% static 'picture/logo-removebg-preview.png' %}" alt="logo" width="200" ></span></a
+          >
+            <div class="links">
+                {# TODO: Add search bar #}
+                <form class="searchbar">
+                    <input type="text" name="guitar" placeholder="Search by model" value="">
+                    <button>
+                        <img src="{% static 'picture/search.png' %}" width="18" height="18" alt="img2">
+                    </button>
+                </form>
+             <!--if no login-->
+           
+            <div class="navigate">
+                <a href="{% url 'guitars' %}">Explore</a>
+                <a href="#">Login</a>
+                <!--if login-->
+                <a href="{% url 'guitars' %}">Explore</a>
+                <a href="#">Logout</a>
+            </div>
+            </div>
+         
+          
+          
+        </nav>
+      </header>
+{% block main_content %}{% endblock %}
+     
+
+      
+
+      <!-- footer-->
+      <footer>
+        <p>&copy;Copyright 2023 guitar house</p>
+        <ul class="social">
+            <li>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i><a>
+                <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+            </li>
+        </ul>
+
+      </footer>
+    
+</body>
+</html>

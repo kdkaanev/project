@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+{#    <link rel="stylesheet" href="{% static 'styles/guitars.css' %}">#}
+    <div class="container">
+    {% if not guitars %}
+    <h1>Not Found Guitars</h1>
+    {% else %}
+    {% for guitar in current_page.object_list %}
+   <div class="card">
+        <img src="{{ guitar.image_url }}" alt="guitar">
+        <h2>{{ guitar.model }}</h2>
+        <p>{{ guitar.short_description }}</p>
+       {# TODO: Add a link to the guitar #}
+        <a href="#">Read More</a>   
+    </div>   
+    {% endfor %}
+       
+    {% endif %}
+    </div>
+     <div class="pagination">
+    <span class="step-links">
+        {% if current_page.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ current_page.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ current_page.number }} of {{ current_page.paginator.num_pages }}.
+        </span>
+
+        {% if current_page.has_next %}
+            <a href="?page={{ current_page.next_page_number }}">next</a>
+            <a href="?page={{ current_page.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+            
+{% endblock %}
