@@ -36,7 +36,10 @@ class Guitar(models.Model):
     )
     description = models.TextField(
         null=True,
+        blank=True
     )
     short_description = models.TextField(
+        max_length=24,
+        blank=True,
         null=True
     )

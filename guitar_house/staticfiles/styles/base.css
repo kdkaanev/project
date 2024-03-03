@@ -22,7 +22,7 @@ body{
 
 nav{
     display: flex;
-    padding: 1%;
+    padding: 8px;
     justify-content: space-between;
     background-color: #CCD0D9;
 }
