@@ -36,4 +36,4 @@ def show_guitars(request):
         'current_page': current_page,
     }
 
-    return render(request, 'guitars.html', context)
+    return render(request, 'guitars/guitars.html', context)

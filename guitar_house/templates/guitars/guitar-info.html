@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_content %}
+    <div class="container">
+
+        <div class="card-info">
+             <div class="pics">
+            <img src="{{ guitar.image_url }}" alt="guitar">
+        </div>    
+
+        <div class="info">
+            <h1>{{ guitar.brand }}</h1>
+            <h2>{{ guitar.model }}</h2>
+            {# TODO: Add seller name #}
+            <h3>Seller: Kancho</h3>
+            <p class="description">{{ guitar.description }}</p>
+            <p>Price: ${{ guitar.price }}</p>
+            {# TODO: Add link seller #}
+            <button class="btn"><a href="#">Contact Seller</a></button>
+            
+        </div> 
+        </div>   
+
+    </div>
+
+{% endblock %}

@@ -13,7 +13,7 @@
         <h2>{{ guitar.model }}</h2>
         <p>{{ guitar.short_description }}</p>
        {# TODO: Add a link to the guitar #}
-        <a href="#">Read More</a>   
+        <a href="{% url 'guitar-info' guitar.pk %}">Read More</a>   
     </div>   
     {% endfor %}
        
