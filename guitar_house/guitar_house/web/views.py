@@ -4,17 +4,26 @@ from django.shortcuts import render
 from guitar_house.guitar.models import Guitar
 
 
+
 # Create your views here.
 def index(request):
-
     return render(request, 'index.html')
 
 def show_guitars(request):
-    queryset = Guitar.objects.all().order_by('model')  # Replace with your actual queryset or None
-    items_per_page = 3 # You can adjust this value based on your preference
+    guitar_model_pattern = request.GET.get('guitar_model_pattern', None)
+
+
+
+
+
+    guitars = Guitar.objects.all()
+
+    if guitar_model_pattern:
+        guitars = guitars.filter(model__icontains=guitar_model_pattern)
+    items_per_page = 3 # You can adjust this value baseeld on your preference
 
     # Initialize the paginator
-    paginator = Paginator(queryset, items_per_page)
+    paginator = Paginator(guitars, items_per_page)
 
     # Get the current page number from the request's GET parameters
     page = request.GET.get('page', 1)
@@ -32,8 +41,11 @@ def show_guitars(request):
     # Pass the current page's objects to the template
 
     context = {
-        'guitars': queryset,
+
+
         'current_page': current_page,
+        'guitars': guitars,
+        'guitar_model_pattern': guitar_model_pattern
     }
 
     return render(request, 'guitars/guitars.html', context)

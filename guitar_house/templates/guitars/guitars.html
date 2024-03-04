@@ -12,7 +12,7 @@
         <img src="{{ guitar.image_url }}" alt="guitar">
         <h2>{{ guitar.model }}</h2>
         <p>{{ guitar.short_description }}</p>
-       {# TODO: Add a link to the guitar #}
+       
         <a href="{% url 'guitar-info' guitar.pk %}">Read More</a>   
     </div>   
     {% endfor %}
@@ -23,8 +23,8 @@
      <div class="pagination">
     <span class="step-links">
         {% if current_page.has_previous %}
-            <a href="?page=1"><i class="fa-solid fa-angles-left" style="color: #63E6BE; font-size: 30px"></i></a>
-            <a href="?page={{ current_page.previous_page_number }}"><i class="fa-solid fa-angle-left" style="color: #63E6BE; font-size: 30px"></i></a>
+            <a href="?page=1{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angles-left" style="color: #63E6BE; font-size: 30px"></i></a>
+            <a href="?page={{ current_page.previous_page_number }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angle-left" style="color: #63E6BE; font-size: 30px"></i></a>
         {% endif %}
 
         <span class="current">
@@ -32,8 +32,8 @@
         </span>
 
         {% if current_page.has_next %}
-            <a href="?page={{ current_page.next_page_number }}"><i class="fa-solid fa-chevron-right" style="color: #63E6BE; font-size: 30px"></i></a>
-            <a href="?page={{ current_page.paginator.num_pages }}"><i class="fa-solid fa-angles-right" style="color: #63E6BE; font-size: 30px"></i></a>
+            <a href="?page={{ current_page.next_page_number }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-chevron-right" style="color: #63E6BE; font-size: 30px"></i></a>
+            <a href="?page={{ current_page.paginator.num_pages }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angles-right" style="color: #63E6BE; font-size: 30px"></i></a>
         {% endif %}
     </span>
 </div>

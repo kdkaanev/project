@@ -23,9 +23,9 @@
             ><span><img src="{% static 'picture/logo-removebg-preview.png' %}" alt="logo" width="200" ></span></a
           >
             <div class="links">
-                {# TODO: Add search bar #}
-                <form class="searchbar">
-                    <input type="text" name="guitar" placeholder="Search by model" value="">
+                
+                <form class="searchbar" action="{% url 'guitars' %}" method="get">
+                    <input type="text"  name="guitar_model_pattern" placeholder="Search by model" value="{% if guitar_model_pattern %}{{ guitar_model_pattern }}{% endif %}">
                     <button>
                         <img src="{% static 'picture/search.png' %}" width="18" height="18" alt="img2">
                     </button>

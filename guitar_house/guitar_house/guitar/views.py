@@ -10,6 +10,7 @@ class DetailGuitarView(views.DetailView):
     queryset = Guitar.objects.all()
     template_name = 'guitars/guitar-info.html'
 
+
 class CreateGuitarView(views.CreateView):
     queryset = Guitar.objects.all()
     fields = ['brand', 'model', 'type', 'price', 'image_url', 'description', 'short_description']
