@@ -17,3 +17,9 @@ class CreateGuitarView(views.CreateView):
     template_name = 'guitars/add-guitar.html'
 
     success_url = reverse_lazy('guitars')
+
+class ShowGuitarsView(views.ListView):
+    queryset = Guitar.objects.all().order_by('model')
+    template_name = 'guitars/review.html'
+    context_object_name = 'guitars'
+    paginate_by = 3

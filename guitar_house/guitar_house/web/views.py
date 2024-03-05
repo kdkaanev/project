@@ -16,7 +16,7 @@ def show_guitars(request):
 
 
 
-    guitars = Guitar.objects.all()
+    guitars = Guitar.objects.all().order_by('model')
 
     if guitar_model_pattern:
         guitars = guitars.filter(model__icontains=guitar_model_pattern)

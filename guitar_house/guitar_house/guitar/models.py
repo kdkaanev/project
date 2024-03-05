@@ -43,3 +43,28 @@ class Guitar(models.Model):
         blank=True,
         null=True
     )
+
+
+RATING_CHOICES = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+)
+class Review(models.Model):
+
+    guitar = models.ForeignKey(
+        to=Guitar,
+        on_delete=models.CASCADE
+    )
+
+    text = models.TextField()
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    rating = models.IntegerField(
+        choices=RATING_CHOICES,
+        default=1,
+
+    )

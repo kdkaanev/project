@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "guitar_house.web",
     "guitar_house.account",
-    "guitar_house.guitar"
+    "guitar_house.guitar",
 ]
 
 MIDDLEWARE = [

@@ -21,4 +21,5 @@ urlpatterns = (
     path('admin/', admin.site.urls),
     path('', include('guitar_house.web.urls')),
     path('guitars/', include('guitar_house.guitar.urls')),
+
 )
