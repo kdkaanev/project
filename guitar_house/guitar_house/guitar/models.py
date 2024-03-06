@@ -56,7 +56,8 @@ class Review(models.Model):
 
     guitar = models.ForeignKey(
         to=Guitar,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='reviews'
     )
 
     text = models.TextField()

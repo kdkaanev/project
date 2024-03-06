@@ -15,7 +15,8 @@
             <h3>Seller: Kancho</h3>
             <p class="description">{{ guitar.description }}</p>
             <p>Price: ${{ guitar.price }}</p>
-            {# TODO: Add link seller #}
+            {# TODO: Add link seller and review #}
+            <button class="btn"><a href="{% url 'guitar-reviews' guitar.pk %}">Review</a></button>
             <button class="btn"><a href="#">Contact Seller</a></button>
             
         </div> 
