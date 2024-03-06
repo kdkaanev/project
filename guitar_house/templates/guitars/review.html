@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
-    <div class="container">
-        <h1>Reviews</h1>
-        <p>There are no reviews yet.</p>
-     <div class="container">
 
-        <div class="card-info">
-             <p>{{object.type}}</p>
-        </div>    
+    {% if not guitar.reviews.all %}
+        <h1>Not Found Reviews</h1>
+    {% else %}
+        {% for review in guitar.reviews.all %}
 
-        <div class="info">
-         
-          
-            
-        </div> 
-        </div>   
 
-    </div>
 
-    </div>
+
+            <div class="container">
+                <div class="card-info">
+                    {# TODO: Add user name #}
+                    <h1>Kancho:</h1>
+                    <p>{{ review.text }}</p>
+                    
+                </div>
+
+
+            </div>
+        {% endfor %}
+    {% endif %}
+
 {% endblock %}
+    
