@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "guitar_house.web",
-    "guitar_house.account",
+    "guitar_house.accounts",
     "guitar_house.guitar",
 ]
 
@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'guitar_house.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "guitar_house_db",
+        "NAME": "guitar_house",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "127.0.0.1",
@@ -136,3 +136,5 @@ STATICFILES_DIRS = [
     ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.GuitarHouseUser'

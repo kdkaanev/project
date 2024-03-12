@@ -1,5 +1,7 @@
 from django.db import models
 
+from guitar_house.common.models import UserRelated
+
 # Create your models here.
 CHOICES = (
     ('Acoustic', 'Acoustic'),
@@ -10,7 +12,7 @@ CHOICES = (
     ('Other', 'Other')
 )
 
-class Guitar(models.Model):
+class Guitar(UserRelated,models.Model):
     brand = models.CharField(
         max_length=100,
         null=True,
@@ -54,11 +56,6 @@ RATING_CHOICES = (
 )
 class Review(models.Model):
 
-    guitar = models.ForeignKey(
-        to=Guitar,
-        on_delete=models.CASCADE,
-        related_name='reviews'
-    )
 
     text = models.TextField()
     created_at = models.DateTimeField(
@@ -69,3 +66,8 @@ class Review(models.Model):
         default=1,
 
     )
+    guitar = models.ForeignKey(
+        to=Guitar,
+        on_delete=models.CASCADE,
+    )
+
