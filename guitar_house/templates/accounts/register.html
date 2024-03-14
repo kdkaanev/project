@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
+{% load filters %}
 {% load static %}
 {% block main_content %}
 <div class="container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <form action="{% url 'sign-up' %}" method="post">
+        
+        {{ form.email|placeholder:"Email" }}
+        {{ form.password1|placeholder:"Password" }}
+        {{ form.password2|placeholder:"Confirm password" }}
         <input type="submit" value="Register">
+        {% csrf_token %}
     </form>
 </div>
 {% endblock %}

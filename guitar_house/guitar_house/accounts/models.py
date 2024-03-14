@@ -12,6 +12,7 @@ from django.contrib.auth import models as auth_models
 
 from guitar_house.accounts.managers import GuitarHouseUserManager
 
+
 class GuitarHouseUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         _("email address"),
@@ -61,9 +62,6 @@ class Profile(models.Model):
         null=True,
         blank=True,
     )
-
-
-
 
     # @property
     # def full_name(self):

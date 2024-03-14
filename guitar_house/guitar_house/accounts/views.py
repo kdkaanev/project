@@ -19,3 +19,13 @@ class SignUpUserView(views.CreateView):
         login(self.request, form.instance)
 
         return result
+
+
+class SignInUserView(auth_views.LoginView):
+    template_name = 'accounts/login.html'
+    redirect_authenticated_user = True
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('index')
