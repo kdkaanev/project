@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
-from guitar_house.common.models import UserRelated
 
+
+UserModel = get_user_model()
 # Create your models here.
 CHOICES = (
     ('Acoustic', 'Acoustic'),
@@ -11,8 +13,15 @@ CHOICES = (
     ('Hollow Body', 'Hollow'),
     ('Other', 'Other')
 )
+RATING_CHOICES = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+)
 
-class Guitar(UserRelated,models.Model):
+class Guitar(models.Model):
     brand = models.CharField(
         max_length=100,
         null=True,
@@ -46,14 +55,11 @@ class Guitar(UserRelated,models.Model):
         null=True
     )
 
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE
+    )
 
-RATING_CHOICES = (
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5'),
-)
 class Review(models.Model):
 
 
@@ -69,5 +75,9 @@ class Review(models.Model):
     guitar = models.ForeignKey(
         to=Guitar,
         on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE
     )
 

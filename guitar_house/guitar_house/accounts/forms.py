@@ -8,5 +8,7 @@ class GuitarUserCreationForm(auth_forms.UserCreationForm):
         fields = ('email',)
 
 
+
+
 class GuitarUserChangeForm(auth_forms.UserChangeForm):
     pass

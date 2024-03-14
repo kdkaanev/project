@@ -8,7 +8,7 @@ from guitar_house.accounts.forms import GuitarUserCreationForm
 
 
 # Create your views here.
-class Signupuserview(views.CreateView):
+class RegisterUserView(views.CreateView):
     template_name = 'accounts/register.html'
     form_class = GuitarUserCreationForm
     success_url = reverse_lazy('index')
@@ -16,7 +16,7 @@ class Signupuserview(views.CreateView):
     def form_valid(self, form):
         result = super().form_valid(form)
 
-        login(self.request, form.user)
+        login(self.request, form.instance)
 
         return result
 
