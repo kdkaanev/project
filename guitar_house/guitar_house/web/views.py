@@ -49,3 +49,8 @@ def show_guitars(request):
     }
 
     return render(request, 'guitars/guitars.html', context)
+
+def user_guitars(request):
+    user = request.user
+    user_guitars = Guitar.objects.filter(user=user).all().order_by('model')
+    return render(request, 'user_guitars.html', {'user_guitars': user_guitars})

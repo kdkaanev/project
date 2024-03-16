@@ -11,18 +11,21 @@ from django.db import models
 from django.contrib.auth import models as auth_models
 
 from guitar_house.accounts.managers import GuitarHouseUserManager
-
+from guitar_house.accounts.validators import validate_phone_number
 
 
 class GuitarHouseUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
+    EMAIL_ERROR_MESSAGES = {
+        "unique": _("A user with that email already exists."),
+    }
     email = models.EmailField(
         _("email address"),
         unique=True,
-        error_messages={
-            "unique": _("A user with that email already exists."),
-        },
+        error_messages=EMAIL_ERROR_MESSAGES,
     )
-    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    date_joined = models.DateTimeField(
+        _("date joined"), default=timezone.now,
+    )
 
     is_staff = models.BooleanField(
         default=False,
@@ -62,6 +65,14 @@ class Profile(models.Model):
     profile_picture = models.URLField(
         null=True,
         blank=True,
+    )
+    phone_number = models.CharField(
+        max_length=20,
+        validators=[
+            validate_phone_number
+        ],
+        null=False,
+        blank=False,
     )
     user = models.OneToOneField(
         to=GuitarHouseUser,

@@ -15,15 +15,17 @@
             <h1>{{object.full_name}}</h1>
             
         
-         {% if object.user.guitar_set.all %}
-    <ul>
-        {% for guitar in object.user.guitar_set.all %}
-            <li>{{ guitar.model }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No guitars found for this user.</p>
-{% endif %}
+            <p class="description">{{object.description}}</p>
+            <p>Phone: {{object.user.phone_number}}</p>
+            <p>Email: {{object.user.email}}</p>
+            
+        
+            <button class="btn"><a href="{% url 'user-guitars' %}">Show Guitars</a></button>
+            {% if object.user == request.user %}
+
+            <button class="btn"><a href="#">Edit Profile</a></button>
+            
+            {% endif %}
 
             
             
