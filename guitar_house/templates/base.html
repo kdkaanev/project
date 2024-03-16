@@ -34,12 +34,14 @@
              <div class="navigate">
             {% if request.user.is_authenticated %}
                 
-                <a href="{% url 'guitars' %}">Explore</a>
+                <a href="{% url 'guitars' %}">Guitars</a>
+                <a href="{% url 'profile' pk=request.user.pk %}">Profile</a>
                 <a href="{% url 'sign-out' %}">Logout</a>
+                
              <!--if no login-->
            {% else %}
            
-                <a href="{% url 'guitars' %}">Explore</a>
+                <a href="{% url 'guitars' %}">Guitars</a>
                 <a href="{% url 'sign-in' %}">Login</a>/<a href="{% url 'sign-up' %}">Register</a>
                
             </div>

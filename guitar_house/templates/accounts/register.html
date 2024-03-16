@@ -2,13 +2,15 @@
 {% load filters %}
 {% load static %}
 {% block main_content %}
-<div class="container">
+<div class="container accounts">
     <form action="{% url 'sign-up' %}" method="post">
         
-        {{ form.email|placeholder:"Email" }}
+        <div class="title">
+                {{ form.email|placeholder:"Email" }}
         {{ form.password1|placeholder:"Password" }}
         {{ form.password2|placeholder:"Confirm password" }}
         <input type="submit" value="Register">
+        </div>
         {% csrf_token %}
     </form>
 </div>

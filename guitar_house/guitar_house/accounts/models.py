@@ -65,11 +65,12 @@ class Profile(models.Model):
     )
     user = models.OneToOneField(
         to=GuitarHouseUser,
+        primary_key=True,
         on_delete=models.CASCADE,
     )
 
-    # @property
-    # def full_name(self):
-    #     if self.first_name and self.last_name:
-    #         return f"{self.first_name} {self.last_name}"
-    #     return self.first_name or self.last_name
+    @property
+    def full_name(self):
+        if self.first_name and self.last_name:
+            return f"{self.first_name} {self.last_name}"
+        return self.first_name or self.last_name

@@ -57,8 +57,10 @@ class Guitar(models.Model):
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+
     )
+
 
 class Review(models.Model):
 
@@ -76,8 +78,5 @@ class Review(models.Model):
         to=Guitar,
         on_delete=models.CASCADE,
     )
-    user = models.ForeignKey(
-        UserModel,
-        on_delete=models.CASCADE
-    )
+
 

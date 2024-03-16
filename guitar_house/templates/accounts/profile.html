@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filters %}
+{% block main_content %}
+    <div class="container">
+
+        <div class="card-info">
+             <div class="pics">
+            <img src="{{object.profile_picture}}" alt="user">
+            
+        </div>    
+
+        <div class="info">
+      
+            <h1>{{object.full_name}}</h1>
+            
+        
+         {% if object.user.guitar_set.all %}
+    <ul>
+        {% for guitar in object.user.guitar_set.all %}
+            <li>{{ guitar.model }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No guitars found for this user.</p>
+{% endif %}
+
+            
+            
+        </div> 
+        </div>   
+
+    </div>
+
+{% endblock %}

@@ -7,3 +7,10 @@
     font-family: "Gamja Flower", sans-serif;
     max-height: fit-content;
 }
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px ;
+    margin-bottom: 20px;
+}

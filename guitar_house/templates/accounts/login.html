@@ -4,10 +4,12 @@
 {% block main_content %}
 <div class="container accounts">
     <form action="{% url 'sign-in' %}?next={{ next }}" method="post">
-        {% csrf_token %}
+        <div class="title">
        <p>{{ form.username|placeholder:"Email" }}</p>
        <p>{{ form.password|placeholder:"Password" }}</p>
+        </div>
         <input type="submit" value="Login">
+            {% csrf_token %}
     </form>
 </div>
 {% endblock %}
