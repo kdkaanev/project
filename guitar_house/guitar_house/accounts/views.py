@@ -32,6 +32,25 @@ class DetailProfileView(views.DetailView):
     template_name = 'accounts/profile.html'
 
 
+class EditProfileView(views.UpdateView):
+    queryset = Profile.objects.all()
+    template_name = 'accounts/edit-profile.html'
+    fields = ('first_name', 'last_name', 'date_of_birth', 'profile_picture')
+
+
+    def get_success_url(self):
+        return reverse_lazy('profile', kwargs={'pk': self.object.pk})
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['date_of_birth'].widget = forms.DateInput(attrs={'type': 'date'})
+        return form
+
+class DeleteProfileView(views.DeleteView):
+    queryset = UserModel.objects.all()
+    template_name = 'accounts/delete-profile.html'
+    success_url = reverse_lazy('index')
+
 
 
 def sign_out(request):

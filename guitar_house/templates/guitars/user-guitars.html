@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
-{#    <link rel="stylesheet" href="{% static 'styles/guitars.css' %}">#}
+     <button class="btn"><a href="{% url 'guitar-add' %}">Add guitar</a></button>
     <div class="container">
-    {% if not guitars %}
+   
+    {% if not user_guitars %}
+        
     <h1>Not Found Guitars</h1>
+        
     {% else %}
      
-    {% for guitar in current_page.object_list %}
+    {% for guitar in user_guitars %}
    <div class="card">
    <div class="pics">
         <img src="{{ guitar.image_url }}" alt="guitar">
@@ -24,22 +27,6 @@
     {% endif %}
     </div>
     
-     <div class="pagination">
-    <span class="step-links">
-        {% if current_page.has_previous %}
-            <a href="?page=1{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angles-left" style="color: #63E6BE; font-size: 30px"></i></a>
-            <a href="?page={{ current_page.previous_page_number }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angle-left" style="color: #63E6BE; font-size: 30px"></i></a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ current_page.number }} of {{ current_page.paginator.num_pages }}.
-        </span>
-
-        {% if current_page.has_next %}
-            <a href="?page={{ current_page.next_page_number }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-chevron-right" style="color: #63E6BE; font-size: 30px"></i></a>
-            <a href="?page={{ current_page.paginator.num_pages }}{% if guitar_model_pattern %}&guitar_model_pattern={{ guitar_model_pattern }}{% endif %}"><i class="fa-solid fa-angles-right" style="color: #63E6BE; font-size: 30px"></i></a>
-        {% endif %}
-    </span>
-</div>
+ 
             
 {% endblock %}

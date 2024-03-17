@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% load static %}
+{% block main_content %}
+<div class="container accounts">
+    <form action="{% url 'edit-profile' pk=object.pk %}" method="post">
+
+        <div class="title">
+         {{ form.as_p }}
+        </div>
+        <button class="btn"><input type="submit"></button>
+        <button class="btn"><a href="{% url 'delete-profile' pk=object.pk %}">Delete Profile</a></button>
+
+        {% csrf_token %}
+    </form>
+
+</div>
+{% endblock %}

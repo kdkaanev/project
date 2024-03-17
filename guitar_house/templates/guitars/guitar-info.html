@@ -12,12 +12,17 @@
             <h1>{{ guitar.brand }}</h1>
             <h2>{{ guitar.model }}</h2>
             {# TODO: Add seller name #}
-            <h3>Seller: Kancho</h3>
+            <h3>Seller: {{ guitar.user.profile.full_name }}</h3>
             <p class="description">{{ guitar.description }}</p>
             <p>Price: ${{ guitar.price }}</p>
             {# TODO: Add link seller and review #}
-            <button class="btn"><a href="{% url 'guitar-reviews' guitar.pk %}">Review</a></button>
-            <button class="btn"><a href="#">Contact Seller</a></button>
+            
+            {% if guitar.user != request.user %}
+                <button class="btn"><a href="">Contact Seller</a></button>
+                 <button class="btn"><a href="{% url 'guitar-reviews' guitar.pk %}">Review</a></button>
+            {% else %}
+                <button class="btn"><a href="{% url 'guitar-edit' guitar.pk %}">Edit</a></button>
+            {% endif %}
             
         </div> 
         </div>   

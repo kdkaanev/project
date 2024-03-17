@@ -23,7 +23,7 @@
             <button class="btn"><a href="{% url 'user-guitars' %}">Show Guitars</a></button>
             {% if object.user == request.user %}
 
-            <button class="btn"><a href="#">Edit Profile</a></button>
+            <button class="btn"><a href="{% url 'edit-profile' pk=object.pk %}">Edit Profile</a></button>
             
             {% endif %}
 
