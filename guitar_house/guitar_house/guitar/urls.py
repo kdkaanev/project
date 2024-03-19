@@ -1,11 +1,11 @@
 from django.urls import path
 
-from guitar_house.guitar.views import DetailGuitarView, CreateGuitarView, ReviewGuitarsView
+from guitar_house.guitar.views import DetailGuitarView, CreateGuitarView, ReviewGuitarsView, EditGuitarView
 
 urlpatterns = (
     path('details/<int:pk>/', DetailGuitarView.as_view(), name='guitar-info'),
     path('add/',  CreateGuitarView.as_view(), name='guitar-add'),
     path('reviews/<int:pk>/', ReviewGuitarsView.as_view(), name='guitar-reviews'),
-    path('edit/<int:pk>/', CreateGuitarView.as_view(), name='guitar-edit'),
+    path('edit/<int:pk>/', EditGuitarView.as_view(), name='guitar-edit'),
 
 )

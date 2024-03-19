@@ -46,8 +46,8 @@ class CreateGuitarView(LoginRequiredMixin, views.CreateView):
         return super().form_valid(form)
 
 class EditGuitarView(ContextDataMixin,views.UpdateView):
-    model = Guitar
-    form_class = GuitarEditForm
+    queryset = Guitar.objects.all()
+    fields = ['brand', 'model', 'type', 'price', 'image_url', 'description', 'short_description']
     template_name = 'guitars/edit-guitar.html'
 
     success_url = reverse_lazy('guitars')
