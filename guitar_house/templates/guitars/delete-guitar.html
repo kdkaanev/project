@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% load static %}
+{% block main_content %}
+<div class="container accounts">
+      <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete this guitar?</p>
+    <form method="post">
+       
+        <button type="submit">Confirm</button>
+         {% csrf_token %}
+    </form>
+
+</div>
+{% endblock %}

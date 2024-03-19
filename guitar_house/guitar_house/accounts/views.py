@@ -35,7 +35,7 @@ class DetailProfileView(views.DetailView):
 class EditProfileView(views.UpdateView):
     queryset = Profile.objects.all()
     template_name = 'accounts/edit-profile.html'
-    fields = ('first_name', 'last_name', 'date_of_birth', 'profile_picture')
+    fields = ('first_name', 'last_name', 'date_of_birth', 'profile_picture', 'phone_number',)
 
 
     def get_success_url(self):

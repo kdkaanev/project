@@ -10,7 +10,7 @@ def index(request):
     return render(request, 'index.html')
 
 def show_guitars(request):
-    guitar_model_pattern = request.GET.get('guitar_model_pattern', None)
+    guitar_type_pattern = request.GET.get('guitar_type_pattern', None)
 
 
 
@@ -18,8 +18,8 @@ def show_guitars(request):
 
     guitars = Guitar.objects.all().order_by('model')
 
-    if guitar_model_pattern:
-        guitars = guitars.filter(model__icontains=guitar_model_pattern)
+    if guitar_type_pattern:
+        guitars = guitars.filter(type__icontains=guitar_type_pattern)
     items_per_page = 3 # You can adjust this value baseeld on your preference
 
     # Initialize the paginator
@@ -45,7 +45,7 @@ def show_guitars(request):
 
         'current_page': current_page,
         'guitars': guitars,
-        'guitar_model_pattern': guitar_model_pattern
+        'guitar_type_pattern': guitar_type_pattern
     }
 
     return render(request, 'guitars/guitars.html', context)

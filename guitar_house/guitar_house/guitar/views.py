@@ -15,13 +15,7 @@ class MakeFieldsReadOnlyMixin:
         for field in form.fields:
             form.fields[field].widget.attrs['readonly'] = 'readonly'
 
-class ContextDataMixin:
 
-            def get_context_data(self, **kwargs):
-                context = super().get_context_data(**kwargs)
-                profile = Guitar.objects.first()
-                context['profile'] = profile
-                return context
 
 
 
@@ -39,18 +33,18 @@ class CreateGuitarView(LoginRequiredMixin, views.CreateView):
     fields = ['brand', 'model', 'type', 'price', 'image_url', 'description', 'short_description']
     template_name = 'guitars/add-guitar.html'
 
-    success_url = reverse_lazy('guitars')
+    success_url = reverse_lazy('user-guitars')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class EditGuitarView(ContextDataMixin,views.UpdateView):
+class EditGuitarView(views.UpdateView):
     queryset = Guitar.objects.all()
     fields = ['brand', 'model', 'type', 'price', 'image_url', 'description', 'short_description']
     template_name = 'guitars/edit-guitar.html'
 
-    success_url = reverse_lazy('guitars')
+    success_url = reverse_lazy('user-guitars')
 
 
 
@@ -58,6 +52,12 @@ class ReviewGuitarsView(views.DetailView):
     queryset = Guitar.objects.all()
     context_object_name = 'guitar'
     template_name = 'guitars/review.html'
+
+
+class DeleteGuitarView(views.DeleteView):
+    queryset = Guitar.objects.all()
+    template_name = 'guitars/delete-guitar.html'
+    success_url = reverse_lazy('user-guitars')
 
 
 

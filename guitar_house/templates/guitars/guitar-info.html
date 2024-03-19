@@ -22,6 +22,7 @@
                  <button class="btn"><a href="{% url 'guitar-reviews' guitar.pk %}">Review</a></button>
             {% else %}
                 <button class="btn"><a href="{% url 'guitar-edit' guitar.pk %}">Edit</a></button>
+                <button class="btn"><a href="{% url 'guitar-delete' guitar.pk %}">Delete</a></button>
             {% endif %}
             
         </div> 

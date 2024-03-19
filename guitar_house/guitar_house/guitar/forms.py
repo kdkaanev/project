@@ -17,6 +17,6 @@ class GuitarCreationForm(GuitarBasicForm):
 
 
 class GuitarEditForm(GuitarBasicForm):
-    read_only_fields = ('type',)
+   pass
 
 
