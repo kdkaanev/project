@@ -66,6 +66,7 @@ class Review(models.Model):
 
 
     text = models.TextField()
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -77,6 +78,10 @@ class Review(models.Model):
     guitar = models.ForeignKey(
         to=Guitar,
         on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        to=UserModel,
+        on_delete=models.CASCADE
     )
 
 

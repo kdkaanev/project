@@ -1,8 +1,6 @@
 from django import forms
 
-from guitar_house.guitar.models import Guitar
-
-
+from guitar_house.guitar.models import Guitar, Review
 
 
 class GuitarBasicForm(forms.ModelForm):
@@ -18,5 +16,13 @@ class GuitarCreationForm(GuitarBasicForm):
 
 class GuitarEditForm(GuitarBasicForm):
    pass
+
+
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['text', 'rating']
 
 

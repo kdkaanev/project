@@ -7,8 +7,9 @@
 
         <div class="title">
          {{ form.as_p }}
+            <input type="submit" value="Edit Profile">
         </div>
-        <button class="btn"><input type="submit"></button>
+
         <button class="btn"><a href="{% url 'delete-profile' pk=object.pk %}">Delete Profile</a></button>
 
         {% csrf_token %}

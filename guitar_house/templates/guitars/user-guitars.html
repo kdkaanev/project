@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
+    {% if user.profile.phone_number %}
      <button class="btn"><a href="{% url 'guitar-add' %}">Add guitar</a></button>
+    {% else %}
+     <button class="btn"><a href="{% url 'edit-profile' user.profile.pk %}">Edit Profile</a></button>
+    {% endif %}
     <div class="container">
    
     {% if not user_guitars %}

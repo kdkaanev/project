@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main_content %}
-
-    {% if not guitar.reviews.all %}
+    <button class="btn"><a href="{% url 'add-review' guitar_id=guitar.id %}">Write Reviews</a></button>
+    <button class="btn"><a href="{% url 'guitar-info' guitar.pk %}">Back</a></button>
+    {% if not reviews%}
         <h1>Not Found Reviews</h1>
     {% else %}
-        {% for review in guitar.reviews.all %}
+        {% for review in reviews %}
 
 
 
 
             <div class="container">
                 <div class="card-info">
-                    {# TODO: Add user name #}
-                    <h1>Kancho:</h1>
+                    {% if review.user.profile.full_name %}
+                    <h1>{{ review.user.profile.full_name }}</h1>
+                        {% else %}
+                    <h1>{{ review.user.email}}</h1>
+                    {% endif %}
                     <p>{{ review.text }}</p>
                     
                 </div>

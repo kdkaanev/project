@@ -10,7 +10,6 @@ def placeholder(field, token):
 
 @register.filter
 def get_guitar(user):
-    print(user.guitar)
     return user.guitar
 
 

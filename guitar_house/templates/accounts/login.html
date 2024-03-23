@@ -2,13 +2,26 @@
 {% load static %}
 {% load filters %}
 {% block main_content %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 <div class="container accounts">
+
     <form action="{% url 'sign-in' %}?next={{ next }}" method="post">
         <div class="title">
        <p>{{ form.username|placeholder:"Email" }}</p>
        <p>{{ form.password|placeholder:"Password" }}</p>
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
         </div>
         <input type="submit" value="Login">
+    <h1>or</h1>
+        <button class="btn"><a href="{% url 'sign-up' %}">Register</a></button>
             {% csrf_token %}
     </form>
 </div>
