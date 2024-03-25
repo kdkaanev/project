@@ -1,14 +1,11 @@
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import views as auth_views, login, logout, get_user_model, authenticate
+from django import forms
+from django.contrib.auth import views as auth_views, login, logout, get_user_model
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django import forms
 
 from guitar_house.accounts.forms import GuitarUserCreationForm, GuitarUserLoginForm
 from guitar_house.accounts.models import Profile
-from guitar_house.guitar import models
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 UserModel = get_user_model()
 # Create your views here.
@@ -25,16 +22,10 @@ class RegisterUserView(views.CreateView):
         return result
 
 
-class SignInUserView(auth_views.LoginView, LoginRequiredMixin):
+class SignInUserView(auth_views.LoginView):
     form_class = GuitarUserLoginForm
     template_name = 'accounts/login.html'
     redirect_authenticated_user = True
-
-
-
-
-
-
 
 
 class DetailProfileView(views.DetailView):

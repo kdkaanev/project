@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class WebConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'guitar_house.web'
+    name = 'guitar_house.common'

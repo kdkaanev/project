@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
-    "guitar_house.web",
+    "guitar_house.common",
     "guitar_house.accounts",
     "guitar_house.guitar",
 ]

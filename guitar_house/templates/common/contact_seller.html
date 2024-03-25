@@ -1,0 +1,12 @@
+{% extends 'common/base.html' %}
+{% load filters %}
+{% load static %}
+{% block main_content %}
+<div class="container accounts">
+    <form  method="post">
+        {{ form.as_p }}
+        <input type="submit" value="Contact seller">
+        {% csrf_token %}
+    </form>
+</div>
+{% endblock %}

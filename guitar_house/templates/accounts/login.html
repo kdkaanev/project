@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'common/base.html' %}
 {% load static %}
 {% load filters %}
 {% block main_content %}
@@ -11,7 +11,7 @@
 {% endif %}
 <div class="container accounts">
 
-    <form action="{% url 'sign-in' %}?next={{ next }}" method="post">
+    <form method="post">
         <div class="title">
        <p>{{ form.username|placeholder:"Email" }}</p>
        <p>{{ form.password|placeholder:"Password" }}</p>
@@ -19,6 +19,7 @@
                 <p>{{ error }}</p>
             {% endfor %}
         </div>
+         <input type="hidden" name="next" value="{{ request.GET.next }}">
         <input type="submit" value="Login">
     <h1>or</h1>
         <button class="btn"><a href="{% url 'sign-up' %}">Register</a></button>

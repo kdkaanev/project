@@ -1,13 +1,14 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from guitar_house.common.forms import MessageForm
 from guitar_house.guitar.models import Guitar
 
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'common/index.html')
 
 def show_guitars(request):
     guitar_type_pattern = request.GET.get('guitar_type_pattern', None)
@@ -54,3 +55,20 @@ def user_guitars(request):
     user = request.user
     user_guitars = Guitar.objects.filter(user=user).all().order_by('model')
     return render(request, 'guitars/user-guitars.html', {'user_guitars': user_guitars})
+
+
+
+def contact_seller(request, guitar_id):
+    guitar = Guitar.objects.get(pk=guitar_id)
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.recipient = guitar.user
+            message.guitar = guitar
+            message.save()
+            return redirect('guitar-info', guitar.pk)
+    else:
+        form = MessageForm()
+    return render(request, 'common/contact_seller.html', {'form': form, 'guitar': guitar})
