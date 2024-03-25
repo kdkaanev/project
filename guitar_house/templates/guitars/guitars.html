@@ -1,5 +1,6 @@
 {% extends 'common/base.html' %}
 {% load static %}
+{% load filters %}
 {% block main_content %}
 {#    <link rel="stylesheet" href="{% static 'styles/guitars.css' %}">#}
     <div class="container">
@@ -15,6 +16,12 @@
        <div class="info">
         <h2>{{ guitar.model }}</h2>
         <p>{{ guitar.short_description }}</p>
+           {% if guitar|average_rating %}
+           <p>rating: {{ guitar|average_rating|floatformat:"2" }}</p>
+           {% else %}
+           <p>No reviews</p>
+           {% endif %}
+
        
         <a href="{% url 'guitar-info' guitar.pk %}">Read More</a>
        </div>

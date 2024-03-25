@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 from guitar_house.common.forms import MessageForm
 from guitar_house.guitar.models import Guitar
-
+from django.contrib import messages
 
 
 # Create your views here.
@@ -21,7 +21,7 @@ def show_guitars(request):
 
     if guitar_type_pattern:
         guitars = guitars.filter(type__icontains=guitar_type_pattern)
-    items_per_page = 3 # You can adjust this value baseeld on your preference
+    items_per_page = 6 # You can adjust this value baseeld on your preference
 
     # Initialize the paginator
     paginator = Paginator(guitars, items_per_page)
@@ -59,16 +59,20 @@ def user_guitars(request):
 
 
 def contact_seller(request, guitar_id):
-    guitar = Guitar.objects.get(pk=guitar_id)
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            message.sender = request.user
-            message.recipient = guitar.user
-            message.guitar = guitar
-            message.save()
-            return redirect('guitar-info', guitar.pk)
+    if not request.user.is_authenticated:
+        messages.error(request, "Only logged in users can contact the seller.")
+        return redirect('sign-in')
     else:
-        form = MessageForm()
-    return render(request, 'common/contact_seller.html', {'form': form, 'guitar': guitar})
+        guitar = Guitar.objects.get(pk=guitar_id)
+        if request.method == 'POST':
+            form = MessageForm(request.POST)
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.sender = request.user
+                message.recipient = guitar.user
+                message.guitar = guitar
+                message.save()
+                return redirect('guitar-info', guitar.pk)
+        else:
+            form = MessageForm()
+        return render(request, 'common/contact_seller.html', {'form': form, 'guitar': guitar})

@@ -72,7 +72,7 @@ class Review(models.Model):
     )
     rating = models.IntegerField(
         choices=RATING_CHOICES,
-        default=1,
+        default=None,
 
     )
     guitar = models.ForeignKey(
