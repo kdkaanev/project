@@ -3,9 +3,14 @@
 {% load static %}
 {% block main_content %}
 <div class="container accounts">
+   
     <form  method="post">
+        <p>phone:</p>
+        <h3>{{ guitar.user.profile.phone_number }}</h3>
         {{ form.as_p }}
+        
         <input type="submit" value="Contact seller">
+      
         {% csrf_token %}
     </form>
 </div>

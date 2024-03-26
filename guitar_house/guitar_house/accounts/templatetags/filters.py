@@ -19,3 +19,5 @@ def average_rating(guitar):
     avg_rating = avg_rating['rating__avg']
     return avg_rating
 
+
+

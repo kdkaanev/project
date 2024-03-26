@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 
 from guitar_house.common.forms import MessageForm
+from guitar_house.common.models import Message
 from guitar_house.guitar.models import Guitar
 from django.contrib import messages
 
@@ -76,3 +77,24 @@ def contact_seller(request, guitar_id):
         else:
             form = MessageForm()
         return render(request, 'common/contact_seller.html', {'form': form, 'guitar': guitar})
+
+
+
+
+def sent_messages(request):
+
+    # Get the current user's sent messages
+    sent_messages = Message.objects.filter(recipient=request.user)
+
+    context = {
+        'sent_messages': sent_messages
+    }
+
+    # Pass the sent messages to the template
+    return render(request, 'common/sent_messages.html', context)
+
+def delete_message(request, message_id):
+    message = Message.objects.get(pk=message_id)
+    message.delete()
+    return redirect('show-messages')
+

@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 
-
+# '0831-62-221-129-19.ngrok-free.app'
 
 ]
 CSRF_TRUSTED_ORIGINS = [
@@ -154,3 +154,20 @@ LOGOUT_REDIRECT_URL = reverse_lazy('index')
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}

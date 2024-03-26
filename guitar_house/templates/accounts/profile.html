@@ -19,13 +19,18 @@
             <p>Phone: {{object.phone_number}}</p>
             <p>Email: {{object.user.email}}</p>
             
+            
         
             <button class="btn"><a href="{% url 'user-guitars' %}">Show Guitars</a></button>
             {% if object.user == request.user %}
 
             <button class="btn"><a href="{% url 'edit-profile' pk=object.pk %}">Edit Profile</a></button>
+                
             
             {% endif %}
+        
+           <button class="btn"><a href="{% url 'show-messages' %}">Messages {{object.user.received_messages.count}}</a></button>
+        
 
             
             

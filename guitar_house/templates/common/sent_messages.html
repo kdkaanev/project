@@ -1,0 +1,39 @@
+
+
+{% extends 'common/base.html' %}
+{% load static %}
+{% block main_content %}
+   
+        {% for message in sent_messages %}
+
+
+
+
+            <div class="container">
+                <div class="card-info">
+                    <h2>{{ message.sender.profile.full_name }}</h2>
+                <p>{{ message.message }}</p>
+                    
+                                <button class="btn"><a href="{% url 'delete-message' message.pk %}">Delete</a></button>
+
+
+                </div>
+         
+
+
+            </div>
+        {% endfor %}
+    
+   
+
+{% endblock %}
+    
+
+
+
+<ul>
+  {% for message in sent_messages %}
+    <li>{{ message.message }}{{ message.sender.profile.full_name }}</li>
+    <!-- Display other message details as needed -->
+  {% endfor %}
+</ul>
