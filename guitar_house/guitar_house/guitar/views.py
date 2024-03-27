@@ -81,7 +81,8 @@ class DeleteGuitarView(views.DeleteView):
 def add_review(request, guitar_id):
     if not request.user.is_authenticated:
         messages.error(request, "Only logged in users can make a review.")
-        return redirect('sign-in')
+
+        return redirect('guitar-reviews', pk=guitar_id)
     else:
         guitar = get_object_or_404(Guitar, pk=guitar_id)
         if request.method == 'POST':

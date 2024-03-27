@@ -1,8 +1,20 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block main_content %}
+ 
+    
+
     <button class="btn"><a href="{% url 'add-review' guitar_id=guitar.id %}">Write Reviews</a></button>
     <button class="btn"><a href="{% url 'guitar-info' guitar.pk %}">Back</a></button>
+         {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+             <button class="btn"><a href="{% url 'sign-in' %}?next={{ request.path }}">Login</a> </button>
+         
+{% endif %}
     {% if not reviews%}
         <h1>Not Found Reviews</h1>
     {% else %}

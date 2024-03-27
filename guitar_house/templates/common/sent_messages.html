@@ -12,9 +12,13 @@
             <div class="container">
                 <div class="card-info">
                     <h2>{{ message.sender.profile.full_name }}</h2>
-                <p>{{ message.message }}</p>
+                    <p>{{ message.message }}</p>
+                    <a href="{% url 'delete-message' message.pk %}">Delete message</a>
                     
-                                <button class="btn"><a href="{% url 'delete-message' message.pk %}">Delete</a></button>
+                    {# TODO: Maybe make whit js #}
+                    <a href="{% url 'guitar-info' message.guitar.pk %}">Show Guitar</a> 
+                    
+                  
 
 
                 </div>

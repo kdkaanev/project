@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib import messages
 from django.contrib.auth import views as auth_views, login, logout, get_user_model
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -26,6 +28,7 @@ class SignInUserView(auth_views.LoginView):
     form_class = GuitarUserLoginForm
     template_name = 'accounts/login.html'
     redirect_authenticated_user = True
+
 
 
 class DetailProfileView(views.DetailView):
