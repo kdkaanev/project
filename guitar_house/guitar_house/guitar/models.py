@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
-
 UserModel = get_user_model()
 # Create your models here.
 CHOICES = (
@@ -20,6 +18,7 @@ RATING_CHOICES = (
     (4, '4'),
     (5, '5'),
 )
+
 
 class Guitar(models.Model):
     brand = models.CharField(
@@ -63,8 +62,6 @@ class Guitar(models.Model):
 
 
 class Review(models.Model):
-
-
     text = models.TextField()
 
     created_at = models.DateTimeField(
@@ -83,5 +80,3 @@ class Review(models.Model):
         to=UserModel,
         on_delete=models.CASCADE
     )
-
-

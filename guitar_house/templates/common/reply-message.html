@@ -1,0 +1,48 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block main_content %}
+   
+        
+
+
+
+    
+
+            <div class="container">
+            
+                <div class="card-info">
+                     <h3>{{ message.sender.profile.full_name }}</h3>
+                    <p class="messages">{{ message.message }}</p>
+                   
+                     <form method="post">
+   
+                {{ form.as_p }}
+    <input type="submit" value="Reply">
+                       
+                          <a  href="#" onclick="goBack()">Back</a>
+                          {% csrf_token %}
+            </form>
+                    
+                  
+                </div>
+               
+
+                </div>
+         
+
+
+            </div>
+    
+    
+    <script>
+function goBack() {
+  window.history.back();
+}
+</script>
+  
+
+{% endblock %}
+    
+
+
+

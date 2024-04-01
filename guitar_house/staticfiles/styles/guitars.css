@@ -46,7 +46,8 @@
 .card-info{
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: 1fr 2fr;
+
+
     width: 60%;
     height: fit-content;
     border: 1px solid #ccc;
@@ -57,6 +58,34 @@
     background-color: rgb(190, 213, 204,0.8);
       font-family: "Gamja Flower", sans-serif;
 }
+.sent{
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+    "name message"
+"show-guitar message"
+"delete message"
+"reply message";
+}
+.guitar, .profile{
+    grid-template-columns: 1fr 2fr;
+}
+.message{
+    grid-area: message;
+    overflow-wrap: anywhere;
+}
+.name{
+    grid-area: name;
+}
+.delete{
+    grid-area: delete;
+}
+.show{
+    grid-area: show-guitar;
+}
+.reply{
+    grid-area: reply;
+}
+
 .card-info img{
     max-width: 100%;
     height: auto;
@@ -90,4 +119,3 @@
     color: #e76964;
     font-weight: bold;
 }
-

@@ -9,6 +9,8 @@ from guitar_house.guitar.forms import GuitarEditForm, ReviewForm
 from guitar_house.guitar.models import Guitar, Review
 
 UserModel = get_user_model()
+
+
 class MakeFieldsReadOnlyMixin:
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
@@ -17,16 +19,10 @@ class MakeFieldsReadOnlyMixin:
             form.fields[field].widget.attrs['readonly'] = 'readonly'
 
 
-
-
-
-
 # Create your views here.
 class DetailGuitarView(views.DetailView):
     queryset = Guitar.objects.all()
     template_name = 'guitars/guitar-info.html'
-
-
 
 
 class CreateGuitarView(LoginRequiredMixin, views.CreateView):
@@ -40,7 +36,8 @@ class CreateGuitarView(LoginRequiredMixin, views.CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class EditGuitarView(views.UpdateView):
+
+class EditGuitarView(views.UpdateView, LoginRequiredMixin):
     queryset = Guitar.objects.all()
     fields = ['brand', 'model', 'type', 'price', 'image_url', 'description', 'short_description']
     template_name = 'guitars/edit-guitar.html'
@@ -48,10 +45,7 @@ class EditGuitarView(views.UpdateView):
     success_url = reverse_lazy('user-guitars')
 
 
-
 class ReviewGuitarsView(views.DetailView):
-
-
     queryset = Guitar.objects.all()
     context_object_name = 'guitar'
     template_name = 'guitars/review.html'
@@ -63,19 +57,10 @@ class ReviewGuitarsView(views.DetailView):
         return context
 
 
-
-
-
-
-
-
-
-class DeleteGuitarView(views.DeleteView):
+class DeleteGuitarView(views.DeleteView, LoginRequiredMixin):
     queryset = Guitar.objects.all()
     template_name = 'guitars/delete-guitar.html'
     success_url = reverse_lazy('user-guitars')
-
-
 
 
 def add_review(request, guitar_id):
@@ -96,8 +81,3 @@ def add_review(request, guitar_id):
         else:
             form = ReviewForm()
     return render(request, 'guitars/write-review.html', {'form': form})
-
-
-
-
-

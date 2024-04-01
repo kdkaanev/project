@@ -3,20 +3,26 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block main_content %}
-   
+   {% if not message %}
+            <h2>Message does not exist</h2>
+            {% else %}
         {% for message in sent_messages %}
 
-
+        
 
 
             <div class="container">
-                <div class="card-info">
-                    <h2>{{ message.sender.profile.full_name }}</h2>
-                    <p>{{ message.message }}</p>
-                    <a href="{% url 'delete-message' message.pk %}">Delete message</a>
+                <div class="card-info sent">
+                    <h2 class="name">{{ message.sender.profile.full_name }}</h2>
+                    <p class="message">{{ message.message }}</p>
+                      
+                    <a class="delete"href="{% url 'delete-message' message.pk %}">Delete message</a>
+                  
                     
                     {# TODO: Maybe make whit js #}
-                    <a href="{% url 'guitar-info' message.guitar.pk %}">Show Guitar</a> 
+                    <a class="show" href="{% url 'guitar-info' message.guitar.pk %}">Show Guitar</a> 
+                    <button class="btn reply"><a href="{% url 'reply-message' message.pk %}">Reply</a></button>
+                  
                     
                   
 
@@ -27,9 +33,10 @@
 
             </div>
         {% endfor %}
+     {% endif %}
     
-   
-
+    
+     
 {% endblock %}
     
 
@@ -38,6 +45,6 @@
 <ul>
   {% for message in sent_messages %}
     <li>{{ message.message }}{{ message.sender.profile.full_name }}</li>
-    <!-- Display other message details as needed -->
+   
   {% endfor %}
 </ul>

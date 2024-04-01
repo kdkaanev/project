@@ -13,6 +13,16 @@ class GuitarUserCreationForm(auth_forms.UserCreationForm):
         fields = ('email',)
 
 
+    def clean(self):
+        email = self.cleaned_data.get('email')
+
+        #
+        # Perform custom validation
+        if email and UserModel.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email is already registered. Please use a different email.")
+        return self.cleaned_data
+
+
 
 
 class GuitarUserChangeForm(auth_forms.UserChangeForm):

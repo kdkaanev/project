@@ -3,10 +3,19 @@
 {% load static %}
 {% block main_content %}
 <div class="container accounts">
+  
+
     <form action="{% url 'sign-up' %}" method="post">
         
         <div class="title">
-                {{ form.email|placeholder:"Email" }}
+            {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+            {{ form.email|placeholder:"Email" }}
         {{ form.password1|placeholder:"Password" }}
         {{ form.password2|placeholder:"Confirm password" }}
         <input type="submit" value="Register">

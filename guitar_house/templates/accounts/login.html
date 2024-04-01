@@ -5,19 +5,34 @@
   
 <div class="container accounts">
 
+
     <form method="post">
+    
         <div class="title">
+            {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
        <p>{{ form.username|placeholder:"Email" }}</p>
        <p>{{ form.password|placeholder:"Password" }}</p>
-            {% for error in form.non_field_errors %}
-                <p>{{ error }}</p>
-            {% endfor %}
+          
         </div>
-         <input type="hidden" name="next" value="{{ next }}">
+         
         <input type="submit" value="Login">
     <h1>or</h1>
         <button class="btn"><a href="{% url 'sign-up' %}">Register</a></button>
+     <button class="btn" onclick="goBack()">Back</button>
             {% csrf_token %}
     </form>
 </div>
+                  
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 {% endblock %}

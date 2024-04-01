@@ -1,49 +1,42 @@
+from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render
+from django.shortcuts import redirect
 
-from guitar_house.common.forms import MessageForm
+from guitar_house.common.forms import MessageForm, ReplyForm
 from guitar_house.common.models import Message
 from guitar_house.guitar.models import Guitar
-from django.contrib import messages
 
 
 # Create your views here.
 def index(request):
     return render(request, 'common/index.html')
 
+
 def show_guitars(request):
     guitar_type_pattern = request.GET.get('guitar_type_pattern', None)
-
-
-
-
 
     guitars = Guitar.objects.all().order_by('model')
 
     if guitar_type_pattern:
         guitars = guitars.filter(type__icontains=guitar_type_pattern)
-    items_per_page = 6 # You can adjust this value baseeld on your preference
+    items_per_page = 6
 
-    # Initialize the paginator
     paginator = Paginator(guitars, items_per_page)
 
-    # Get the current page number from the request's GET parameters
     page = request.GET.get('page', 1)
 
     try:
-        # Get the Page object for the given page number
+
         current_page = paginator.page(page)
     except PageNotAnInteger:
-        # If the page parameter is not an integer, show the first page
+
         current_page = paginator.page(1)
     except EmptyPage:
-        # If the page parameter is out of range (e.g., 9999), deliver the last page
+
         current_page = paginator.page(paginator.num_pages)
 
-    # Pass the current page's objects to the template
-
     context = {
-
 
         'current_page': current_page,
         'guitars': guitars,
@@ -52,16 +45,16 @@ def show_guitars(request):
 
     return render(request, 'guitars/guitars.html', context)
 
+
 def user_guitars(request):
     user = request.user
     user_guitars = Guitar.objects.filter(user=user).all().order_by('model')
     return render(request, 'guitars/user-guitars.html', {'user_guitars': user_guitars})
 
 
-
 def contact_seller(request, guitar_id):
     if not request.user.is_authenticated:
-        messages.error(request, "Only logged in users can contact the seller.")
+        messages.warning(request, "Only logged in users can contact the seller.")
         return redirect('sign-in')
     else:
         guitar = Guitar.objects.get(pk=guitar_id)
@@ -79,22 +72,33 @@ def contact_seller(request, guitar_id):
         return render(request, 'common/contact_seller.html', {'form': form, 'guitar': guitar})
 
 
-
-
 def sent_messages(request):
-
-    # Get the current user's sent messages
     sent_messages = Message.objects.filter(recipient=request.user)
 
     context = {
         'sent_messages': sent_messages
     }
 
-    # Pass the sent messages to the template
     return render(request, 'common/sent_messages.html', context)
+
+
+def reply_message(request, message_id):
+    message = get_object_or_404(Message, pk=message_id)
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.sender = message.recipient
+            reply.recipient = message.sender
+            reply.guitar = message.guitar
+            reply.save()
+            return redirect('show-messages')
+    else:
+        form = ReplyForm()
+    return render(request, 'common/reply-message.html', {'form': form, 'message': message})
+
 
 def delete_message(request, message_id):
     message = Message.objects.get(pk=message_id)
     message.delete()
     return redirect('show-messages')
-
