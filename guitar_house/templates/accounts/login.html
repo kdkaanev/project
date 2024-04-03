@@ -7,8 +7,9 @@
 
 
     <form method="post">
-    
+       
         <div class="title">
+         {{ form.non_field_errors }}
             {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -16,7 +17,9 @@
         {% endfor %}
     </ul>
 {% endif %}
+       
        <p>{{ form.username|placeholder:"Email" }}</p>
+       
        <p>{{ form.password|placeholder:"Password" }}</p>
           
         </div>

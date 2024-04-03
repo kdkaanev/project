@@ -39,7 +39,7 @@ class GuitarUserLoginForm(auth_forms.AuthenticationForm):
         email = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
 
-        # Perform custom validation
+
         if email and password:
             self.user_cache = authenticate(username=email, password=password)
             if self.user_cache is None:
