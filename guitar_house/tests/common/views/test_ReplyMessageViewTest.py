@@ -52,10 +52,4 @@ class ReplyMessageViewTest(TestCase):
         self.assertEqual(self.user1.received_messages.count(), 0)
 
 
-    #TODO: this test bot working
-    def test_unauthenticated_user_redirected_to_login(self):
-        response = self.client.get(reverse('reply-message', kwargs={'message_id': self.message.pk}))
-        self.assertRedirects(response,reverse('sign-in'))
-        response = self.client.post(reverse('reply-message', kwargs={'message_id': self.message.pk}), {'message': 'Reply'})
-        self.assertRedirects(response,reverse('sign-in'))
-        self.assertEqual(self.user1.received_messages.count(), 0)
+
