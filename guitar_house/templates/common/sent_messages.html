@@ -3,10 +3,8 @@
 {% extends 'common/base.html' %}
 {% load static %}
 {% block main_content %}
-   {% if not message %}
-            <h2>Message does not exist</h2>
-            {% else %}
-        {% for message in sent_messages %}
+   
+       {% for message in sent_messages %}
 
         
 
@@ -33,9 +31,8 @@
 
             </div>
         {% endfor %}
-     {% endif %}
     
-    
+
      
 {% endblock %}
     

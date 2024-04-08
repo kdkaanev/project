@@ -47,8 +47,7 @@ def show_guitars(request):
 
 
 def user_guitars(request):
-    user = request.user
-    user_guitars = Guitar.objects.filter(user=user).all().order_by('model')
+    user_guitars = Guitar.objects.prefetch_related('user').all().order_by('model')
     return render(request, 'guitars/user-guitars.html', {'user_guitars': user_guitars})
 
 
@@ -93,8 +92,12 @@ def reply_message(request, message_id):
             reply.guitar = message.guitar
             reply.save()
             return redirect('show-messages')
+
     else:
         form = ReplyForm()
+
+
+
     return render(request, 'common/reply-message.html', {'form': form, 'message': message})
 
 

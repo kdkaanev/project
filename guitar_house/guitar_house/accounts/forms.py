@@ -3,7 +3,7 @@ from django.contrib.auth import forms as auth_forms, get_user_model, authenticat
 from django.contrib.auth.forms import UsernameField
 from django.core.exceptions import ValidationError
 
-from guitar_house.accounts.models import GuitarHouseUser
+from guitar_house.accounts.models import GuitarHouseUser, Profile
 
 UserModel = get_user_model()
 class GuitarUserCreationForm(auth_forms.UserCreationForm):
@@ -23,9 +23,16 @@ class GuitarUserCreationForm(auth_forms.UserCreationForm):
         return self.cleaned_data
 
 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'date_of_birth', 'profile_picture', 'phone_number']
+
+
 
 
 class GuitarUserChangeForm(auth_forms.UserChangeForm):
+
     pass
 
 
@@ -46,3 +53,12 @@ class GuitarUserLoginForm(auth_forms.AuthenticationForm):
                 raise forms.ValidationError("Invalid email or password")
 
         return self.cleaned_data
+
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'date_of_birth', 'profile_picture', 'phone_number']
+
+

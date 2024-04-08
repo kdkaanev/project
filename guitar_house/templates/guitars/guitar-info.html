@@ -24,7 +24,7 @@
             {% else %}
                 <button class="btn"><a href="{% url 'guitar-edit' guitar.pk %}">Edit</a></button>
                 <button class="btn"><a href="{% url 'guitar-delete' guitar.pk %}">Delete</a></button>
-
+             <a  href="#" onclick="goBack()">Back</a>
 
             {% endif %}
             
@@ -32,5 +32,13 @@
         </div>   
 
     </div>
-
+    <script>
+function goBack() {
+  window.history.back();
+}
+</script>
 {% endblock %}
+
+
+
+  

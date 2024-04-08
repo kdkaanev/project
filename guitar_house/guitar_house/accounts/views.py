@@ -45,11 +45,14 @@ class DetailProfileView(views.DetailView):
 
 class EditProfileView(views.UpdateView, LoginRequiredMixin):
     queryset = Profile.objects.all()
+
     template_name = 'accounts/edit-profile.html'
     fields = ('first_name', 'last_name', 'date_of_birth', 'profile_picture', 'phone_number',)
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.object.pk})
+
+
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
