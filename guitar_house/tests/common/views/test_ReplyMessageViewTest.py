@@ -51,5 +51,3 @@ class ReplyMessageViewTest(TestCase):
         self.assertEqual(response.context['message'], self.message)
         self.assertEqual(self.user1.received_messages.count(), 0)
 
-
-
