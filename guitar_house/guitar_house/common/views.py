@@ -96,8 +96,6 @@ def reply_message(request, message_id):
     else:
         form = ReplyForm()
 
-
-
     return render(request, 'common/reply-message.html', {'form': form, 'message': message})
 
 

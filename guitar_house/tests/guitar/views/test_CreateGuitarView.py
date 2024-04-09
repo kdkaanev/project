@@ -7,8 +7,6 @@ from guitar_house.guitar.models import Guitar
 UserModel = get_user_model()
 
 
-
-
 class CreateGuitarViewTest(TestCase):
     def setUp(self):
         self.client = Client()

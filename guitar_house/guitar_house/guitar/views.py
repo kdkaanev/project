@@ -46,7 +46,7 @@ class EditGuitarView(views.UpdateView, LoginRequiredMixin):
 
 
 class ReviewGuitarsView(views.DetailView):
-    queryset = Guitar.objects.all()
+    queryset = Guitar.objects.prefetch_related('review_set').all()
     context_object_name = 'guitar'
     template_name = 'guitars/review.html'
 
