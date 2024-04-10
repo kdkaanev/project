@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
@@ -25,17 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ak9n%&3f*_^y9$dk49x7bzc_f_2b3fk#7)rrla1e_uv6bx$+&)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG',1)
 
-ALLOWED_HOSTS = [
-
-# '0831-62-221-129-19.ngrok-free.app'
-    '4bdb-217-10-250-51.ngrok-free.app',
-    'localhost',
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 
 
-]
-CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS =[
     f'https://{origin}' for origin in ALLOWED_HOSTS
 ]
 
