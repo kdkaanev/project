@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - guitarhousedemo
+name: Build and deploy Python app to Azure Web App - GuitarHowseApp
 
 on:
   push:
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_730D7BBED3CC4ED4B9FBD2FCB276D234 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4367291E8A5C40F68983BE48492F3BB8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FD9F1C81E1A148FC8427948C57109099 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2892F5B4CC02407B915709F1BC6C3B3C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1FE9CE30C9E444BBB680A898CF8E623D }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5A728E3004C84DCC8ADC97B98C6C799A }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'guitarhousedemo'
+          app-name: 'GuitarHowseApp'
           slot-name: 'Production'
           
