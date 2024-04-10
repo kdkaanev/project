@@ -47,7 +47,8 @@ def show_guitars(request):
 
 
 def user_guitars(request):
-    user_guitars = Guitar.objects.prefetch_related('user').all().order_by('model')
+    current_user = request.user
+    user_guitars = Guitar.objects.filter(user=current_user).order_by('model')
     return render(request, 'guitars/user-guitars.html', {'user_guitars': user_guitars})
 
 

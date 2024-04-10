@@ -30,6 +30,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
 
 # '0831-62-221-129-19.ngrok-free.app'
+    '4bdb-217-10-250-51.ngrok-free.app',
+    'localhost',
 
 
 ]
