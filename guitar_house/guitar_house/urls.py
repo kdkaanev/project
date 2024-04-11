@@ -26,4 +26,4 @@ urlpatterns = (
     path('accounts/', include('guitar_house.accounts.urls')),
 
 )
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
