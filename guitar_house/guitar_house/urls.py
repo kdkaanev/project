@@ -19,13 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = (
+urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('guitar_house.common.urls')),
     path('guitars/', include('guitar_house.guitar.urls')),
     path('accounts/', include('guitar_house.accounts.urls')),
 
-)
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
