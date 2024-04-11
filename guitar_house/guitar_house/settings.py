@@ -152,7 +152,7 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
+
 
 # URL prefix in the client
 STATIC_URL = "/static/"
