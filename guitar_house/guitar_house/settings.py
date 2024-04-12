@@ -155,11 +155,11 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 
 # URL prefix in the client
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
