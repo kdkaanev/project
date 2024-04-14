@@ -152,7 +152,7 @@ USE_TZ = True
 # Directories on the file system
 
 # Directories on the file system
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
