@@ -30,7 +30,7 @@ DEBUG = os.environ.get('DEBUG',1)
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+
 CSRF_TRUSTED_ORIGINS =[
     f'https://{origin}' for origin in ALLOWED_HOSTS
 ]
@@ -109,6 +109,9 @@ else:
 
 
 
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -151,14 +154,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "staticfiles"
+    os.path.join(BASE_DIR, 'static'),
     ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 

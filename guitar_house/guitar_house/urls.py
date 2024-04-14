@@ -25,7 +25,7 @@ urlpatterns = [
     path('guitars/', include('guitar_house.guitar.urls')),
     path('accounts/', include('guitar_house.accounts.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
