@@ -20,7 +20,9 @@ class RegisterUserView(views.CreateView):
     def form_invalid(self, form):
         email = form.cleaned_data.get('email')
         if email and UserModel.objects.filter(email=email).exists():
-            messages.warning(self.request, "This email is already registered. Please use a different email.")
+            messages.warning(
+                self.request, "This email is already registered. Please use a different email."
+            )
             return super().form_invalid(form)
         return super().form_invalid(form)
 
@@ -47,12 +49,16 @@ class EditProfileView(views.UpdateView, LoginRequiredMixin):
     queryset = Profile.objects.all()
 
     template_name = 'accounts/edit-profile.html'
-    fields = ('first_name', 'last_name', 'date_of_birth', 'profile_picture', 'phone_number',)
+    fields = (
+        'first_name',
+        'last_name',
+        'date_of_birth',
+        'profile_picture',
+        'phone_number',
+    )
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'pk': self.object.pk})
-
-
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
