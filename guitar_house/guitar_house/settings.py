@@ -26,8 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', "1") == "1"
-
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 
