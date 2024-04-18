@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from django.urls import reverse_lazy
 from django.core.management.utils import get_random_secret_key
@@ -23,14 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', 'False')
 
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 1)
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
-
-
+ALLOWED_HOSTS = [
+    'localhost',
+]
 CSRF_TRUSTED_ORIGINS = [
     f'https://{origin}' for origin in ALLOWED_HOSTS
 ]
@@ -90,8 +93,12 @@ WSGI_APPLICATION = 'guitar_house.wsgi.application'
 if DEBUG:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "fuck_db",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "127.0.0.1",
+            "PORT": "5432",
         }
     }
 else:
@@ -107,11 +114,15 @@ else:
     }
 
 
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
-
-AUTH_PASSWORD_VALIDATORS = [
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+else:
+    AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
         },
@@ -125,9 +136,6 @@ AUTH_PASSWORD_VALIDATORS = [
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
         },
     ]
-if DEBUG:
-    AUTH_PASSWORD_VALIDATORS = []
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
