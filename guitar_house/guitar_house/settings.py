@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
+# from dotenv import load_dotenv
+#
+# load_dotenv()
 
 from django.urls import reverse_lazy
 from django.core.management.utils import get_random_secret_key
@@ -26,13 +26,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-DEBUG = True
-
+# SECRET_KEY = os.getenv('SECRET_KEY', None)
+#
+# DEBUG = bool(int(os.getenv('DEBUG', 0)))
+SECRET_KEY='@4j#@zzu^bt9$1hue4i1()z9l901k!7tta^d!#47v9x4(h8g-$'
+DEBUG=True
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(' ')
 CSRF_TRUSTED_ORIGINS = [
     f'https://{origin}' for origin in ALLOWED_HOSTS
 ]
@@ -89,30 +92,30 @@ WSGI_APPLICATION = 'guitar_house.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
 if DEBUG:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "fuck_db",
-            "USER": "postgres",
-            "PASSWORD": "postgres",
-            "HOST": "127.0.0.1",
-            "PORT": "5432",
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'fuck_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
     }
+
 else:
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("POSTGRES_DB"),
-            "USER": os.environ.get("POSTGRES_USER"),
-            "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-            "HOST": os.environ.get("POSTGRES_HOST"),
-            "PORT": os.environ.get("POSTGRES_PORT"),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
         }
     }
-
-
 
 
 # Password validation
@@ -194,10 +197,17 @@ LOGGING = {
     },
 }
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = os.getenv('EMAIL_PORT')
+# EMAIL_USE_TLS = bool(os.getenv('EMAIL_USE_TLS'))  # TLS is required for Gmail SMTP
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') # Your Gmail email address
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Your Gmail password or App Password
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587  # or 465 for SSL
-EMAIL_USE_TLS = True  # TLS is required for Gmail SMTP
-EMAIL_HOST_USER = 'kaanev8@gmail.com'  # Your Gmail email address
-EMAIL_HOST_PASSWORD = 'zyih ecbn xiye jxnq '  # Your Gmail password or App Password
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587 # or 465 for SSL
+EMAIL_USE_TLS=1  # TLS is required for Gmail SMTP
+EMAIL_HOST_USER='kaanev8@gmail.com ' # Your Gmail email address
+EMAIL_HOST_PASSWORD='zyih ecbn xiye jxnq '  # Your Gmail password or App Password
+
 

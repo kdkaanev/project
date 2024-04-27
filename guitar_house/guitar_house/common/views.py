@@ -3,9 +3,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import redirect
 
-from guitar_house.common.forms import MessageForm, ReplyForm
-from guitar_house.common.models import Message
-from guitar_house.guitar.models import Guitar
+from .forms import MessageForm, ReplyForm
+from .models import Message
+from .models import Guitar
 
 
 # Create your views here.
