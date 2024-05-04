@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     "guitar_house.common",
     "guitar_house.accounts",
     "guitar_house.guitar",
+
+    "rest_framework"
 ]
 
 MIDDLEWARE = [

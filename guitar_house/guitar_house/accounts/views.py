@@ -19,10 +19,14 @@ class RegisterUserView(views.CreateView):
 
     def form_invalid(self, form):
         email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
         if email and UserModel.objects.filter(email=email).exists():
             messages.warning(
                 self.request, "This email is already registered. Please use a different email."
             )
+            return super().form_invalid(form)
+        if not password:
+            messages.warning(self.request, "Password cannot be empty.")
             return super().form_invalid(form)
         return super().form_invalid(form)
 
