@@ -18,9 +18,15 @@
     {% if not reviews%}
         <h1>Not Found Reviews</h1>
     {% else %}
+   <div id="write-review">     
+<button id="review-btn" class="btn">Write Review</button>
+</div>
+{#    <form>#}
+{#    <textarea  name="review" rows="4" cols="50" ></textarea><br>#}
+{#    <input type="submit" value="Submit Review">#}
+{#</form>#}
         
-
-            <div class="container">
+            <div id="js-container" class="container">
                 {% for review in reviews %}
                 <div class="card-info">
                     
@@ -32,11 +38,11 @@
 {##}
 {#                    <p>{{ review.text }}</p>#}
 
-
+               
 
                 </div>
  {% endfor %}
-               
+            
             </div>
         
        
