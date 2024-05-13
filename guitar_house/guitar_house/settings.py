@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = os.getenv('SECRET_KEY', None)
 #
 # DEBUG = bool(int(os.getenv('DEBUG', 0)))
-SECRET_KEY='@4j#@zzu^bt9$1hue4i1()z9l901k!7tta^d!#47v9x4(h8g-$'
-DEBUG=True
+SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
+DEBUG=os.getenv('DEBUG', False)
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -102,23 +102,27 @@ if DEBUG:
             'NAME': 'fuck_db',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
+
+
+
             'HOST': 'localhost',
             'PORT': '5432',
         }
     }
-
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
+            'NAME': os.getenv('DB_NAME', 'fuck_db'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+
+
+
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
