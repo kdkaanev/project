@@ -3,9 +3,9 @@
 {% block main_content %}
  
     
-{##}
-{#    <button class="btn"><a href="{% url 'add-review' guitar_id=guitar.id %}">Write Reviews</a></button>#}
-{#    <button class="btn"><a href="{% url 'guitar-info' guitar.pk %}">Back</a></button>#}
+
+    <button class="btn"><a href="{% url 'add-review' guitar_id=guitar.id %}">Write Reviews</a></button>
+    <button class="btn"><a href="{% url 'guitar-info' guitar.pk %}">Back</a></button>
          {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -18,37 +18,27 @@
     {% if not reviews%}
         <h1>Not Found Reviews</h1>
     {% else %}
-   <div id="write-review">     
-<button id="review-btn" class="btn">Write Review</button>
-</div>
-{#    <form>#}
-{#    <textarea  name="review" rows="4" cols="50" ></textarea><br>#}
-{#    <input type="submit" value="Submit Review">#}
-{#</form>#}
-        
-            <div id="js-container" class="container">
-                {% for review in reviews %}
+
+    {% for review in reviews %}
                 <div class="card-info">
                     
-{#                    {% if review.user.profile.full_name %}#}
-{#                    <h1>{{ review.user.profile.full_name }}</h1>#}
-{#                        {% else %}#}
-{#                    <h1>{{ review.user.email}}</h1>#}
-{#                    {% endif %}#}
-{##}
-{#                    <p>{{ review.text }}</p>#}
+                    {% if review.user.profile.full_name %}
+                    <h1>{{ review.user.profile.full_name }}</h1>
+                        {% else %}
+                    <h1>{{ review.user.email}}</h1>
+                    {% endif %}
+
+                    <p>{{ review.text }}</p>
 
                
 
                 </div>
  {% endfor %}
-            
-            </div>
         
        
     {% endif %}
    
-<script src="{% static 'js/review.js' %}"></script>
+{#<script src="{% static 'js/review.js' %}"></script>#}
 {% endblock %}
 
      

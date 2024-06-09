@@ -30,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #
 # DEBUG = bool(int(os.getenv('DEBUG', 0)))
 SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
-DEBUG=os.getenv('DEBUG', False)
+# DEBUG=os.getenv('DEBUG', False)
+DEBUG = True
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -54,7 +55,7 @@ INSTALLED_APPS = [
     "guitar_house.accounts",
     "guitar_house.guitar",
 
-    "rest_framework"
+
 ]
 
 MIDDLEWARE = [
