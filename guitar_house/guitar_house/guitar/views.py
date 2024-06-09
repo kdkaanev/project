@@ -4,11 +4,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib import messages
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .serializers import ReviewSerializer
-from rest_framework.renderers import TemplateHTMLRenderer
 
 from guitar_house.guitar.forms import GuitarEditForm, ReviewForm
 from guitar_house.guitar.models import Guitar, Review
@@ -28,6 +23,8 @@ class MakeFieldsReadOnlyMixin:
 class DetailGuitarView(views.DetailView):
     queryset = Guitar.objects.all()
     template_name = 'guitars/guitar-info.html'
+
+
 
 
 class CreateGuitarView(LoginRequiredMixin, views.CreateView):
@@ -60,27 +57,6 @@ class ReviewGuitarsView(views.DetailView):
         guitar = self.get_object()
         context['reviews'] = guitar.review_set.all()
         return context
-class CustomHTMLRenderer(TemplateHTMLRenderer):
-    template_name = 'guitars/review.html'
-class ReviewGuitarsAPIView(APIView):
-    # renderer_classes = [CustomHTMLRenderer]
-    def get(self, request, pk):
-        guitar = get_object_or_404(Guitar, pk=pk)
-        reviews = guitar.review_set.all()
-
-        return Response(ReviewSerializer(reviews, many=True).data)
-    def post(self, request, pk):
-        guitar = get_object_or_404(Guitar, pk=pk)
-        serializer = ReviewSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user, guitar=guitar)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    def delete(self, request, pk):
-        review = get_object_or_404(Review, pk=pk)
-        review.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -94,21 +70,21 @@ class DeleteGuitarView(views.DeleteView, LoginRequiredMixin):
     success_url = reverse_lazy('user-guitars')
 
 
-# def add_review(request, guitar_id):
-#     if not request.user.is_authenticated:
-#         messages.error(request, "Only logged in users can make a review.")
-#
-#         return redirect('guitar-reviews', pk=guitar_id)
-#     else:
-#         guitar = get_object_or_404(Guitar, pk=guitar_id)
-#         if request.method == 'POST':
-#             form = ReviewForm(request.POST)
-#             if form.is_valid():
-#                 review = form.save(commit=False)
-#                 review.guitar = guitar
-#                 review.user = request.user
-#                 review.save()
-#                 return redirect('guitar-reviews', guitar.pk)
-#         else:
-#             form = ReviewForm()
-#     return render(request, 'guitars/write-review.html', {'form': form})
+def add_review(request, guitar_id):
+    if not request.user.is_authenticated:
+        messages.error(request, "Only logged in users can make a review.")
+
+        return redirect('guitar-reviews', pk=guitar_id)
+    else:
+        guitar = get_object_or_404(Guitar, pk=guitar_id)
+        if request.method == 'POST':
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.guitar = guitar
+                review.user = request.user
+                review.save()
+                return redirect('guitar-reviews', guitar.pk)
+        else:
+            form = ReviewForm()
+    return render(request, 'guitars/write-review.html', {'form': form})
