@@ -29,8 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = os.getenv('SECRET_KEY', None)
 #
 # DEBUG = bool(int(os.getenv('DEBUG', 0)))
-SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
+# SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
 # DEBUG=os.getenv('DEBUG', False)
+SECRET_KEY = get_random_secret_key()
 DEBUG = True
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 if DEBUG:
@@ -100,7 +101,7 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'fuck_db',
+            'NAME': 'new_base_db',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
 
