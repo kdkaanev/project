@@ -17,6 +17,7 @@ from pathlib import Path
 
 from django.urls import reverse_lazy
 from django.core.management.utils import get_random_secret_key
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -32,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
 # DEBUG=os.getenv('DEBUG', False)
 SECRET_KEY = get_random_secret_key()
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "1") == "1"
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -115,14 +116,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'fuck_db'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
-
-
-
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
+            'NAME': os.environ.get('POSTGRES_DB'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD':os.environ.get('POSTGRES_PASSWORD'),
+            'HOST': os.environ.get('POSTGRES_HOST'),
+            'PORT': os.environ.get('POSTGRES_PORT'),
         }
     }
 
@@ -172,7 +170,7 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
@@ -188,10 +186,15 @@ AUTHENTICATION_BACKENDS = [
 ]
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
     'handlers': {
         'console': {
             'level': 'DEBUG',
+            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
         },
 
@@ -200,7 +203,6 @@ LOGGING = {
         'django.db.backends': {
             'handlers': ['console'],
             'level': 'DEBUG',
-            'propagate': False,
         },
     },
 }
@@ -219,3 +221,4 @@ EMAIL_HOST_USER='kaanev8@gmail.com ' # Your Gmail email address
 EMAIL_HOST_PASSWORD='zyih ecbn xiye jxnq '  # Your Gmail password or App Password
 
 
+print(os.getenv('ALLOWED_HOSTS'))
