@@ -6,7 +6,11 @@
 
         <div class="card-info profile">
              <div class="pics">
+                {% if object.profile_picture%}
             <img src="{{object.profile_picture}}" alt="user">
+                {% else %}
+                <img src="{% static 'picture/blank-profile-picture.png' %}" alt="user">
+                {% endif %}
             
         </div>    
 
