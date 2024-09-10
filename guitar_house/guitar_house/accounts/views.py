@@ -16,6 +16,7 @@ class RegisterUserView(views.CreateView):
     template_name = 'accounts/register.html'
     form_class = GuitarUserCreationForm
     success_url = reverse_lazy('index')
+    
 
     def form_invalid(self, form):
         email = form.cleaned_data.get('email')

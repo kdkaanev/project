@@ -11,7 +11,11 @@
 
             <div class="container">
                 <div class="card-info sent">
+                  {% if message.sender.profile.full_name %}
                     <h2 class="name">{{ message.sender.profile.full_name }}</h2>
+                  {% else %}
+                  <h2 class="name">{{ message.sender.email }}</h2>
+                  {% endif %}
                     <p class="message">{{ message.message }}</p>
                       
                     <a class="delete"href="{% url 'delete-message' message.pk %}">Delete message</a>

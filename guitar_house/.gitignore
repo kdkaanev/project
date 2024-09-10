@@ -1,1 +1,4 @@
 guitar_house/.env
+../.venv
+../__pycash__
+../migrations
