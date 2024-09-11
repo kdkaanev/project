@@ -3,8 +3,9 @@
 {% block main_content %}
  
     
-
+{% if guitar.user != request.user %}
     <button class="btn"><a href="{% url 'add-review' guitar_id=guitar.id %}">Write Reviews</a></button>
+{% endif %}
     <button class="btn"><a href="{% url 'guitar-info' guitar.pk %}">Back</a></button>
          {% if messages %}
     <ul class="messages">
