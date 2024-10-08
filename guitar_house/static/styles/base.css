@@ -1,0 +1,130 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*html{*/
+/*    height: 100vh;*/
+
+/*}*/
+body{
+
+    background: url(../picture/output-onlinepngtools.png) no-repeat center center fixed;
+    background-size: 100% ;
+    font-family:Arial, Helvetica, sans-serif;
+    position: relative;
+    min-height: 100vh;
+}
+.messages{
+    color:#d2756e;;
+}
+
+
+nav{
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    background-color: #CCD0D9;
+
+}
+.searchbar{
+    display: flex;
+}
+.searchbar input {
+    background-color: #fafafa;
+    width: 80%;
+    padding: 5px 5px 5px 0;
+    text-indent: 21px;
+    outline: none;
+    border: 1px solid rgb(218, 217, 217);
+    border-radius: 2px;
+    color: rgb(77, 77, 77);
+}
+
+.searchbar button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.links{
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+.navigate{
+    display: flex;
+    gap: 16px;
+
+}
+
+.slogans{
+
+    font-family: "Gamja Flower", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+
+
+}
+.g1{
+   margin-top: 100px;
+   margin-left: 100px;
+
+}
+
+.g2{
+  padding-left: 150px;
+
+}
+
+.slo1{
+   padding-top: 100px;
+   padding-left: 100px;
+   font-size: 32px;
+   color:#d2756e;
+    font-weight: bold;
+
+}
+.slo2{
+
+    padding-left: 100px;
+
+    font-size: 32px;
+    margin-bottom: 100px;
+      color: #d2756e;
+    font-weight: bold;
+}
+a{
+    text-decoration: none;
+    color:#273e52;
+}
+.footer {
+    /*position: fixed;*/
+    text-align: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 1%;
+
+    width: 100%;
+
+}
+
+
+
+.fa-brands{
+    color: #273e52;
+    padding-left: 8px;
+}
+ul {
+    list-style: none;
+}

@@ -1,8 +1,33 @@
 version: '3.7'
+
+
 services:
-    app:
-        build: .
-        ports:
-            - "8080:8080"
-        volumes:
-            - .:/app
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: new_base_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: guitar_house
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_DB=new_base_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+
+volumes:
+  postgres_data:
