@@ -1,0 +1,14 @@
+  @media screen and (max-width: 600px) {
+    nav {
+      display: block;
+    }
+      .g1 , .g2{
+        width: 100%;
+        margin: 0 auto;
+       padding: 0 20px;
+      }
+      .slogans{
+          display: flex;
+          flex-direction: column;
+      }
+  }
