@@ -34,21 +34,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG=os.getenv('DEBUG', False)
 SECRET_KEY = get_random_secret_key()
 DEBUG = True
-
+ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_TRUSTED_ORIGINS = ['https://guitar-house.azurewebsites.net']
 
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-    CSRF_TRUSTED_ORIGINS = [
-    f'https://{origin}' for origin in ALLOWED_HOSTS
-]
+
+    
    
 
-else:
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(' ')
-CSRF_TRUSTED_ORIGINS = [
-    f'https://{origin}' for origin in ALLOWED_HOSTS
-]
+   
+
+
 
 
 # Application definition
