@@ -11,8 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
 DEBUG = bool(int(os.getenv('DEBUG', 0)))
-#ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
+ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 CSRF_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_TRUSTED_ORIGINS = ['https://guitar-house.azurewebsites.net']
