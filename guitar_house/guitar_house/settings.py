@@ -27,15 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.getenv('SECRET_KEY', None)
-#
-# DEBUG = bool(int(os.getenv('DEBUG', 0)))
-# SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
-# DEBUG=os.getenv('DEBUG', False)
-SECRET_KEY = get_random_secret_key()
+
+SECRET_KEY=os.getenv('SECRET_KEY', get_random_secret_key())
 DEBUG = bool(int(os.getenv('DEBUG', 0)))
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(' ')
 CSRF_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_TRUSTED_ORIGINS = ['https://guitar-house.azurewebsites.net']
